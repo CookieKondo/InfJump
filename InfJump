@@ -1,0 +1,21 @@
+-- Acessa o personagem do jogador
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Aguarda o personagem ter um "Humanoid" (necessário para modificar a habilidade de pular)
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Função que ativa o pulo infinitamente
+local function permitirPulosInfinitos()
+    -- Sempre que o personagem pular, definimos a propriedade 'Jump' como verdadeira
+    while true do
+        if humanoid:GetState() == Enum.HumanoidStateType.Physics then
+            humanoid:ChangeState(Enum.HumanoidStateType.Physics) -- Garante que o personagem está em estado de física
+            humanoid.Jump = true -- Faz o personagem pular
+        end
+        wait(0.1) -- Espera um tempo para evitar sobrecarga do sistema
+    end
+end
+
+-- Inicia a função de pulo infinito
+permitirPulosInfinitos()
